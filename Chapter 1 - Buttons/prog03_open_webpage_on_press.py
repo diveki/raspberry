@@ -8,4 +8,4 @@ browser = ['google-chrome', 'firefox', 'chromium-browser']
 
 while True:
     button.wait_for_press()
-    os.system(f'{browser[0]} www.facebook.com')  # this assumes you have google-chrome installed
+    os.system(f'{browser[2]} www.facebook.com')  # this assumes you have google-chrome installed
