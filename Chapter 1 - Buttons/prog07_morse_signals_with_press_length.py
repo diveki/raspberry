@@ -1,5 +1,6 @@
 from gpiozero import Button
 from signal import pause
+import time
 
 button = Button(2)
 
@@ -23,21 +24,21 @@ def start():
 def end():
 	global release, msg
 	release = time.time()
-    delay = release - press
-    code = encoder(delay, msg)
-    if code == 'close':
-        msg.close()
-        print('Encripted message saved')
-        print('Please exit the program!')
-    if not msg.closed():
-        msg.write(code)
+	delay = release - press
+	code = encoder(delay)
+	if code == 'close':
+		msg.close()
+		print('Encripted message saved')
+		print('Please exit the program!')
+	if not msg.closed:
+		msg.write(code)
 
 def encoder(delay):
-    if delay >= 1 and delay < 4:
+    if delay >= 1 and delay < 3:
         return 'l'
     elif delay < 1:
         return 's'
-    elif delay >= 4 and delay < 7:
+    elif delay >= 3 and delay < 7:
         return '\n'
     else:
         return 'close'
