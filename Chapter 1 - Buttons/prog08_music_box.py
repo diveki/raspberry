@@ -2,26 +2,34 @@ from gpiozero import Button
 from signal import pause
 from subprocess import call
 import time
+import moc
+# https://www.mankier.com/1/mocp
 # play, stop, next, previous songs on button press
 
 plst = Button(2)
 next_song = Button(3)
-previous_song = Button(4)
+previous_song = Button(17)
 
 path = './Music'
 press = 0
 
 def start_playing():
     global path
-    call(['mocp','-p', path])
+    print('Starting the song')
+    call(['mocp','-S'])
+    #call(['mocp','-p', path])
+    moc.find_and_play(path + '/*')
 
 def stop_playing():
+    print('Stopping the song')
     call(['mocp','-s'])
 
 def play_next_song():
+    print('Playing the next song')
     call(['mocp','--next'])
 
 def play_previous_song():
+    print('Playing the previous song')
     call(['mocp','--previous'])
 
 def start():
