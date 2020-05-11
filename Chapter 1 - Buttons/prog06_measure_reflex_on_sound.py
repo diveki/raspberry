@@ -17,7 +17,7 @@ for n in range(N):
 	print('Press the button when signal heard')
 	ran = random.choice(waiting_times)
 	time.sleep(ran)
-#	os.system('aplay sounds/{0}'.format(sounds[ran-1]))
+	os.system('aplay sounds/{0}'.format(sounds[ran-1]))
 	print('press now')
 
 	start = time.time()

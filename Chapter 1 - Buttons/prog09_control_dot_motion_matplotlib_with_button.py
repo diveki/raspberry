@@ -7,9 +7,9 @@ import sys, pygame, pygame.freetype
 
 # Icons made by <a href="http://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
-# right = Button(2)
-# up_down = Button(3)
-# left = Button(17)
+right = Button(2)
+up_down = Button(3)
+left = Button(17)
 
 pygame.init( )
 pygame.font.init()
@@ -52,14 +52,14 @@ def move_down():
     global ballrect, step
     ballrect = ballrect.move([0,step])
 
-# def play_next_song():
-#     print('Playing the next song')
-#     call(['mocp','--next'])
-#
-# def play_previous_song():
-#     print('Playing the previous song')
-#     call(['mocp','--previous'])
-#
+def move_right():
+    global ballrect, step
+    ballrect = ballrect.move([step,0])
+
+def move_left():
+    global ballrect, step
+    ballrect = ballrect.move([-step,0])
+
 def start():
 	global press
 	press = time.time()
@@ -77,11 +77,8 @@ def encoder(delay):
     else:
         return move_down
 
-# plst.when_pressed = start
-# plst.when_released = end
-#
-# next_song.when_pressed = play_next_song
-# previous_song.when_pressed = play_previous_song
+up_down.when_pressed = start
+up_down.when_released = end
 
 
 while 1:
@@ -89,7 +86,10 @@ while 1:
         print(event)
         if event.type == pygame.QUIT:
             sys.exit()
-        # if right.is_pressed:#If button is pressed, move beachball
+    if right.is_pressed:#If button is pressed, move beachball
+        move_right()
+    if left.is_pressed:
+        move_left()
         # if event.type == pygame.KEYDOWN:
         #     if event.key == pygame.K_RIGHT:
         #         ballrect = ballrect.move([step,0])
