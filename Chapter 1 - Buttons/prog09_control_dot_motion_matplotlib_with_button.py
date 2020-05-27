@@ -17,7 +17,6 @@ font = pygame.font.SysFont('Comic Sans MS', 30)
 
 #Set canvas parameters
 size = width, height = 500, 500
-speed = [100, 100]
 white = 255,255,255
 step = 50
 
