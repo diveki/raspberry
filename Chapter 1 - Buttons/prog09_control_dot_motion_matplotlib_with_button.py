@@ -98,14 +98,14 @@ while 1:
         #         ballrect = ballrect.move([0,step])
         #     if event.key == pygame.K_UP:
         #         ballrect = ballrect.move([0,-step])
-        # if ballrect.left < 0:
-        #     ballrect.left = 0
-        # if ballrect.right > width: #Move beachball up
-        #     ballrect.right = width
-        # if ballrect.top < 0:
-        #     ballrect.top = 0
-        # if ballrect.bottom > height: #Move beachball down
-        #     ballrect.bottom = height
+        if ballrect.left < 0:
+            ballrect.left = 0
+        if ballrect.right > width: #Move beachball up
+            ballrect.right = width
+        if ballrect.top < 0:
+            ballrect.top = 0
+        if ballrect.bottom > height: #Move beachball down
+            ballrect.bottom = height
 
 
 
