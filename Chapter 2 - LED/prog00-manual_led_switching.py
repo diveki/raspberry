@@ -18,3 +18,9 @@ led.on()
 
 # Switch off the LED
 led.off()
+
+led.toggle()
+
+led.blink()
+
+led.source
