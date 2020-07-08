@@ -8,14 +8,13 @@ right_button = Button(15)
 left_button = Button(14)
 
 answer = True
-turn_off = False
+btn_pressed = False
 
 left_name = input('left player name is ')
 right_name = input('right player name is ')
 
 
 def pressed(button):
-	global turn_off
 	if led.is_lit:
 		if button.pin.number == 14:
 			print(left_name + ' won the game')
@@ -26,8 +25,7 @@ def pressed(button):
 			print(left_name + ' lost the game')
 		else:
 			print(right_name + ' lost the game')	
-	turn_off = True
-	
+	btn_pressed = True	
 	
 right_button.when_pressed = pressed
 left_button.when_pressed = pressed
@@ -35,18 +33,17 @@ left_button.when_pressed = pressed
 led.off()
 
 while answer:
-	if not led.is_lit:
-		print('Game has started!')
-		sleep(uniform(2, 10))
-		led.on()
-	if turn_off:
-		led.off()
-		turn_off = False
-		txt = input('Do you want to play again? (y/n) ')
-		if txt == 'y':
-			answer = True
-		else:
-			answer = False
+    led.off()
+    sleep(uniform(2, 10))
+    led.on()
+    if btn_pressed:
+        sleep(2)
+        txt = input('Szeretnél újra játszani? (y/n) ')
+        if txt == 'y':
+            answer = True
+			
+        else:
+            answer = False
 
 
 #Can you put the game into a loop (you’ll need to remove the exit()), so that the LED comes on again?
