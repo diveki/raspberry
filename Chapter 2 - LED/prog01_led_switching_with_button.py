@@ -1,7 +1,7 @@
 from gpiozero import LED, Button
 
-led = LED(14, initial_value = False)
-button = Button(2)
+led = LED(17, initial_value = False)
+button = Button(14)
 
 
 while True:
