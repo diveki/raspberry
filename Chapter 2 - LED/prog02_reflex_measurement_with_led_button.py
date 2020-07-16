@@ -33,15 +33,14 @@ left_button.when_pressed = pressed
 led.off()
 
 while answer:
-    led.off()
-    sleep(uniform(2, 10))
-    led.on()
+	if not led.is_lit:
+		sleep(uniform(2, 10))
+		led.on()
     if btn_pressed:
         sleep(2)
         txt = input('Szeretnél újra játszani? (y/n) ')
         if txt == 'y':
             answer = True
-			
         else:
             answer = False
 
