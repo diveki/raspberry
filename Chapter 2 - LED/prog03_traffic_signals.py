@@ -26,11 +26,11 @@ while True:
 
 # from gpiozero import TrafficLights
 # from time import sleep
-
+#
 # lights = TrafficLights(22, 27, 17)
-
+#
 # lights.green.on()
-
+#
 # while True:
 #     sleep(10)
 #     lights.green.off()
@@ -46,23 +46,23 @@ while True:
 #     lights.red.off()
 
 
-# from gpiozero import TrafficLights
-# from time import sleep
-# from signal import pause
-#
-# lights = TrafficLights(22, 27, 17)
-#
-# def traffic_light_sequence():
-#     while True:
-#         yield (0, 0, 1) # green
-#         sleep(10)
-#         yield (0, 1, 0) # amber
-#         sleep(1)
-#         yield (1, 0, 0) # red
-#         sleep(10)
-#         yield (1, 1, 0) # red+amber
-#         sleep(1)
-#
-# lights.source = traffic_light_sequence()
-#
-# pause()
+from gpiozero import TrafficLights
+from time import sleep
+from signal import pause
+
+lights = TrafficLights(22, 27, 17)
+
+def traffic_light_sequence():
+    while True:
+        yield (0, 0, 1) # green
+        sleep(10)
+        yield (0, 1, 0) # amber
+        sleep(1)
+        yield (1, 0, 0) # red
+        sleep(10)
+        yield (1, 1, 0) # red+amber
+        sleep(1)
+
+lights.source = traffic_light_sequence()
+
+pause()
