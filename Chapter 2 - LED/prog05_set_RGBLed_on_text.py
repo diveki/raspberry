@@ -4,7 +4,7 @@ led = RGBLED(red=9, green=10, blue=11)
 
 colors_dict = {'red': (1,0,0),
           'green': (0,1,0),
-          'blue': (0,0,1), 
+          'blue': (0,0,1),
           'white': (1,1,1),
           'black': (0,0,0),
           'yellow': (1,1,0),
@@ -23,6 +23,6 @@ while True:
     answer = input('What color do you want to see? ')
     color = set_color(answer)
     if color:
-        led.color(color)
+        led.color = color
     else:
         continue
