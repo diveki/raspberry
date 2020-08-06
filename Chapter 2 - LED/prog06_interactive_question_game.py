@@ -1,4 +1,4 @@
-from gpiozero import RGBLED, Button, LED
+from gpiozero import Button, LED
 from time import sleep
 import random
 
