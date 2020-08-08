@@ -40,9 +40,13 @@ def options(city, opt):
 def pressed(button, pos = 0):
     global press, right_answer
     if pos == right_answer:
-        print('You got it right!')
+        blue.on()
+        sleep(3)
+        blue.off()
     else:
-        print('Wroooong!')
+        red.on()
+        sleep(3)
+        red.off()
     press = False
 
 yes.when_pressed = pressed(yes, pos = 1)
