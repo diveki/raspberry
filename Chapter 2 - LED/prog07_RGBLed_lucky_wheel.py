@@ -28,9 +28,11 @@ def pressed():
     global select, target
     if select == target:
         print('You have won!')
+    else:
+        print('You lost!')
 
 while True:
     for key, value in colors_dict.items():
         select = key
-        led.color(value)
+        led.color = value
         time.sleep(wait)
