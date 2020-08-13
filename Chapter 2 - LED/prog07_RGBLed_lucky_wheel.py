@@ -1,7 +1,7 @@
 from gpiozero import RGBLED, Button
 import time
 
-button = Button(2)
+button = Button(17)
 led = RGBLED(red=9, green=10, blue=11)
 
 colors_dict = {'red': (1,0,0),
