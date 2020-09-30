@@ -10,17 +10,38 @@ button_backward = Button(15)
 button_left = Button(18)
 button_right = Button(23)
 
-def move_forward(button, m1, m2):
-    pass
 
-def move_backward(button, m1, m2):
-    pass
+def move_forward(button, m1, m2, speed=0.7):
+    m1.forward(speed=speed)
+    m2.forward(speed=speed)
 
-def move_left(button, m1, m2):
-    pass
+def move_backward(button, m1, m2, speed=0.7):
+    m1.backward(speed=speed)
+    m2.backward(speed=speed)
 
-def move_right(button, m1, m2):
-    pass
+def move_left(button, mleft, mright, speed=0.6):
+    mleft.backward(speed=speed)
+    mright.forward(speed=speed)
+
+def move_right(button, m1, m2, speed=0.6):
+    mleft.forward(speed=speed)
+    mright.backward(speed=speed)
+
+def stop_motors(button, m1, m2):
+    m1.stop()
+    m2.stop()
+
+button_forward.when_held = move_forward(button_forward, motor_left, motor_right)
+button_forward.when_released = stop_motors(button_forward, motor_left, motor_right)
+
+button_backward.when_held = move_backward(button_backward, motor_left, motor_right)
+button_backward.when_released = stop_motors(button_backward, motor_left, motor_right)
+
+button_left.when_held = move_left(button_left, motor_left, motor_right)
+button_left.when_released = stop_motors(button_left, motor_left, motor_right)
+
+button_right.when_held = move_right(button_right, motor_left, motor_right)
+button_right.when_released = stop_motors(button_right, motor_left, motor_right)
 
 
 while True:
