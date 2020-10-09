@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">{{ title }}</h1>
+    <p class="lead">{{ introduction }}</p>
+    <hr class="my-4">
+    <p><strong>Javasolt korosztály:</strong></p>
+    <p class="mb-0"> {{ age }} </p>
+
+    <p><strong>Egy foglalkozás hossza:</strong></p>
+    <p class="mb-0"> {{ duration }} </p>
+
+    <p><strong>Eszközök:</strong></p>
+    <p class="mb-0"> {{ equipments }} </p>
+
+    <p><strong>Előfeltétel:</strong></p>
+    <p class="mb-0"> {{ prerequisit }} </p>
+
+    <hr class="my-4">
+
+    <p><strong>Egy foglalkozás felépítése:</strong></p>
+    <p class="mb-0"> {{ content }} </p>
+
+    <hr class="my-4">
+    
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="#" role="button">Jelentkezés</a>
+    </p>
+  </div>
+  
+{% endblock %}

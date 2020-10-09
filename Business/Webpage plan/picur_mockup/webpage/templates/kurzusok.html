@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="card text-center">
+    <div class="card-header">
+      Kurzus 1
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Játszd magad mérnökké</h5>
+      <p class="card-text">Játékos bevezetés a Raspberry Pi-ba egyszerű elektronikai projekteken keresztül.</p>
+      <a href="{% url 'kurzus1' %}" class="btn btn-primary">Részletek</a>
+    </div>
+    <div class="card-footer text-muted">
+      
+    </div>
+  </div>
+  
+  <div class="card text-center">
+    <div class="card-header">
+      Kurzus 2
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Interaktív projektek okosan!</h5>
+      <p class="card-text">Összetettebb programozási technikák elsajátítása.</p>
+      <a href="{% url 'kurzus2' %}" class="btn btn-primary">Részletek</a>
+    </div>
+    <div class="card-footer text-muted">
+      
+    </div>
+  </div>
+
+  <div class="card text-center">
+    <div class="card-header">
+      Kurzus 3
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Kijelölt projektek</h5>
+      <p class="card-text">Projektek mentorokkal.</p>
+      <a href="{% url 'kurzus3' %}" class="btn btn-primary">Részletek</a>
+    </div>
+    <div class="card-footer text-muted">
+      
+    </div>
+  </div>
+
+  <div class="card text-center">
+    <div class="card-header">
+      Kurzus 4
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Saját projekt üzleti tervvel!</h5>
+      <p class="card-text">Saját projekt kidolgozása mentorok segítségével.</p>
+      <a href="{% url 'kurzus4' %}" class="btn btn-primary">Részletek</a>
+    </div>
+    <div class="card-footer text-muted">
+      
+    </div>
+  </div>
+{% endblock %}

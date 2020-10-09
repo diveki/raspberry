@@ -34,12 +34,12 @@
                 Képzések
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="Kepzesek/Kurzusok/kurzusok.html">Kurzusok</a>
+                <a class="dropdown-item" href="{% url 'kurzusok' %}">Kurzusok</a>
                 <a class="dropdown-item" href="#">Teljesítmény</a>
             </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Iskolák</a>
+                <a class="nav-link" href="{% url 'iskolak' %}">Iskolák</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Inspiráció</a>  <!-- Ide jonnek a tagok altal eszitett videok irasok -->
