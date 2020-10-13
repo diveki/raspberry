@@ -14,7 +14,7 @@ def start(button, m):
     m.stop()
 
 
-button_start.when_pressed = start(button_start, motor)
+button_start.when_pressed = lambda : start(button_start, motor)
 
 
 while True:
