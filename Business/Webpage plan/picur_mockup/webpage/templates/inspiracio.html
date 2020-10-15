@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for item in items %}
+
+
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+    <a href="#">  <!-- Hackster.io-n kell peldat nezni egy reszletes tartalomra-->
+      <h5 class="card-title"> {{ item.title }} </h5>
+    </a>
+        <p class="card-text"> {{ item.abstract }} </p>
+      <p class="card-text">Szerző: {{ item.user }}</p>
+      
+    </div>
+    <div class="card-footer text-muted">
+        Liked: {{ item.likes_count }}
+    </div>
+  </div>
+
+{% endfor %}
+ 
+{% endblock %}

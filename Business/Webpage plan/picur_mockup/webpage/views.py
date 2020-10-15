@@ -68,3 +68,17 @@ def iskolak(request):
               ]
     context = {'items': items}
     return render(request, 'iskolak.html', context = context)
+
+inspiracio = [
+    {'title': 'Fingo parna', 'user': 'picur', 'likes_count': 12, 'views_count': 100, 'abstract': 'Ez egy projekt a fingoparnarol.', 'link': ''},
+    {'title': 'Fingo parna', 'user': 'picur', 'likes_count': 12, 'views_count': 100, 'abstract': 'Ez egy projekt a fingoparnarol.', 'link': ''},
+    {'title': 'Fingo parna', 'user': 'picur', 'likes_count': 12, 'views_count': 100, 'abstract': 'Ez egy projekt a fingoparnarol.', 'link': ''},
+]
+
+def inspiraciok(request):
+    context = {'items': inspiracio}
+    return render(request, 'inspiracio.html', context = context)
+
+def kapcsolat(request):
+    context = {}
+    return render(request, 'kapcsolat.html', context = context)
