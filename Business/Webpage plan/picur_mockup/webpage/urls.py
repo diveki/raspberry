@@ -9,4 +9,6 @@ urlpatterns = [
     path('kurzusok/kurzus3/', views.kurzus3, name='kurzus3'),
     path('kurzusok/kurzus4/', views.kurzus4, name='kurzus4'),
     path('iskolak/', views.iskolak, name='iskolak'),
+    path('inspiraciok/', views.inspiraciok, name='inspiraciok'),
+    path('kapcsolat/', views.kapcsolat, name='kapcsolat'),
 ]

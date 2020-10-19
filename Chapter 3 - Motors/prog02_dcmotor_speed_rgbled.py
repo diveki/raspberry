@@ -10,20 +10,26 @@ on_off = False   # keeps note about the rotation of the motor True-rotates, Fals
 
 
 def start_stop(button, m):
-    global on_off
+    global on_off, led
     if on_off:
         on_off = False
-        return m.stop
+        m.stop()
+        led.off()
+        print('Motor off...')
     else:
         on_off = True
-        return m.forward
+        m.forward()
+        color = value2rgb(0, 1, m.value)
+        led.color = color
+        print('Motor on...')
 
 def speed(button, increment = 0.1):
     global led, motor
     new_speed = motor.value + increment
     if new_speed > 0 and new_speed < 1.01:
+        print(f'New speed: {new_speed}')
         motor.value = new_speed
-        color = value2rgb(0,1,new_speed)
+        color = value2rgb(0, 1, new_speed)
         led.color = color
     else:
         print('Motor speed is out of range of 0 and 1.')
@@ -38,9 +44,9 @@ def value2rgb(minimum, maximum, value):
     return r, g, b
 
 
-button_start_stop.when_pressed = start_stop(button_start_stop, motor)
-button_faster.when_pressed = speed(button_faster, increment=0.1)
-button_slower.when_pressed = speed(button_slower, increment=-0.1)
+button_start_stop.when_pressed = lambda : start_stop(button_start_stop, motor)
+button_faster.when_pressed = lambda : speed(button_faster, increment=0.1)
+button_slower.when_pressed = lambda : speed(button_slower, increment=-0.1)
 
 while True:
     pass
