@@ -2,13 +2,13 @@ from gpiozero import Motor, Button
 import random
 import time
 
-motor_left = Motor(forward=7, backward = 8, enable=25)  #
-motor_right = Motor(forward=9, backward = 10, enable=11)  # 
+motor_left = Motor(forward=23, backward = 24, enable=25)  #
+motor_right = Motor(forward=9, backward = 10, enable=11)  #
 
 button_forward = Button(14)
 button_backward = Button(15)
 button_left = Button(18)
-button_right = Button(23)
+button_right = Button(21)
 
 
 def move_forward(button, m1, m2, speed=0.7):
