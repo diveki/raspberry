@@ -17,7 +17,7 @@ colors_dict = {'red': (1,0,0),
 }
 
 def set_color(color, cm = colors_dict):
-    col = colors_dict.get(color, None)
+    col = cm.get(color, None)
     return col
 
 while True:
