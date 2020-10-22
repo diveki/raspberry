@@ -82,3 +82,7 @@ def inspiraciok(request):
 def kapcsolat(request):
     context = {}
     return render(request, 'kapcsolat.html', context = context)
+
+def loggedin(request):
+    context = {}
+    return render(request, 'logged_in.html', context = context)

@@ -11,4 +11,5 @@ urlpatterns = [
     path('iskolak/', views.iskolak, name='iskolak'),
     path('inspiraciok/', views.inspiraciok, name='inspiraciok'),
     path('kapcsolat/', views.kapcsolat, name='kapcsolat'),
+    path('loggedin/', views.loggedin, name='loggedin'),
 ]
