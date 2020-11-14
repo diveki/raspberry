@@ -4,7 +4,7 @@ import random
 import time
 
 motor_left = Motor(forward=23, backward = 24, enable=25)  #
-motor_right = Motor(forward=9, backward = 10, enable=11)  #
+motor_right = Motor(forward=22, backward = 27, enable=17)  #
 
 pygame.init( )
 pygame.font.init()
@@ -24,19 +24,19 @@ step = 50
 pygame.display.set_caption("Car test")
 screen = pygame.display.set_mode(size)
 
-def move_forward(m1, m2, speed=0.7):
+def move_forward(m1, m2, speed=0.8):
     m1.forward(speed=speed)
     m2.forward(speed=speed)
 
-def move_backward(m1, m2, speed=0.7):
+def move_backward(m1, m2, speed=0.8):
     m1.backward(speed=speed)
     m2.backward(speed=speed)
 
-def move_left(mleft, mright, speed=0.6):
+def move_left(mleft, mright, speed=0.8):
     mleft.backward(speed=speed)
     mright.forward(speed=speed)
 
-def move_right(m1, m2, speed=0.6):
+def move_right(mleft, mright, speed=0.8):
     mleft.forward(speed=speed)
     mright.backward(speed=speed)
 
@@ -65,20 +65,20 @@ while 1:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
                 print('Move right...')
-                # move_right(motor_left, motor_right)
+                move_right(motor_left, motor_right)
             if event.key == pygame.K_LEFT:
                 print('Move left...')
-                # move_left(motor_left, motor_right)
+                move_left(motor_left, motor_right)
             if event.key == pygame.K_DOWN:
                 print('Move backward...')
-                # move_backward(motor_left, motor_right)
+                move_backward(motor_left, motor_right)
             if event.key == pygame.K_UP:
                 print('Move forward...')
-                # move_forward(motor_left, motor_right)
+                move_forward(motor_left, motor_right)
 
         if event.type == pygame.KEYUP:
             print('Stop motors...')
-            # stop_motors(motor_left, motor_right)
+            stop_motors(motor_left, motor_right)
 
 
 
