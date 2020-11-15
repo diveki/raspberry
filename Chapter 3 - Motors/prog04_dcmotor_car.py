@@ -4,7 +4,7 @@ import random
 import time
 
 motor_left = Motor(forward=23, backward = 24, enable=25)  #
-motor_right = Motor(forward=22, backward = 27, enable=17)  #
+motor_right = Motor(forward=27, backward = 22, enable=17)  #
 
 pygame.init( )
 pygame.font.init()
@@ -34,10 +34,10 @@ def move_backward(m1, m2, speed=0.8):
 
 def move_left(mleft, mright, speed=0.8):
     mleft.backward(speed=speed)
-    mright.forward(speed=speed)
+    #mright.forward(speed=speed)
 
 def move_right(mleft, mright, speed=0.8):
-    mleft.forward(speed=speed)
+    #mleft.forward(speed=speed)
     mright.backward(speed=speed)
 
 def stop_motors(m1, m2):
@@ -65,16 +65,16 @@ while 1:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
                 print('Move right...')
-                move_right(motor_left, motor_right)
+                move_right(motor_left, motor_right, speed=1)
             if event.key == pygame.K_LEFT:
                 print('Move left...')
-                move_left(motor_left, motor_right)
+                move_left(motor_left, motor_right, speed=1)
             if event.key == pygame.K_DOWN:
                 print('Move backward...')
-                move_backward(motor_left, motor_right)
+                move_backward(motor_left, motor_right, speed=1)
             if event.key == pygame.K_UP:
                 print('Move forward...')
-                move_forward(motor_left, motor_right)
+                move_forward(motor_left, motor_right, speed=1)
 
         if event.type == pygame.KEYUP:
             print('Stop motors...')
