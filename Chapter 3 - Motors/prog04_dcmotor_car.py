@@ -1,14 +1,11 @@
 from gpiozero import Motor, Button
 import sys, pygame, pygame.freetype
-import random
 import time
 
 motor_left = Motor(forward=23, backward = 24, enable=25)  #
 motor_right = Motor(forward=27, backward = 22, enable=17)  #
 
 pygame.init( )
-pygame.font.init()
-font = pygame.font.SysFont('Comic Sans MS', 30)
 
 # button_forward = Button(14)
 # button_backward = Button(15)
@@ -16,12 +13,9 @@ font = pygame.font.SysFont('Comic Sans MS', 30)
 # button_right = Button(21)
 
 #Set canvas parameters
-size = width, height = 500, 500
-white = 255,255,255
-step = 50
+size = 500, 500
 
-#Display title on canvas
-pygame.display.set_caption("Car test")
+#Display size
 screen = pygame.display.set_mode(size)
 
 def move_forward(m1, m2, speed=0.8):
@@ -80,13 +74,4 @@ while 1:
             print('Stop motors...')
             stop_motors(motor_left, motor_right)
 
-
-
-    # screen.fill(white)#Set background of canvas
-    # if ballrect.centerx == carrect.centerx and ballrect.centery == carrect.centery:
-    #     text_surface = font.render("Hm, Yummy!", True, (255, 0, 0))
-    #     screen.blit(text_surface, (width/2-30, height/2))
-    # screen.blit(carrot, carrect)
-    # screen.blit(ball, ballrect)
-    pygame.display.flip()
     time.sleep(0.1)#Wait for 100ms before next button press
