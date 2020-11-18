@@ -1,0 +1,34 @@
+miniconda install - 
+  https://stackoverflow.com/questions/39371772/how-to-install-anaconda-on-raspberry-pi-3-model-b/56852714#56852714
+
+wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-armv7l.sh
+sudo md5sum Miniconda3-latest-Linux-armv7l.sh
+sudo /bin/bash Miniconda3-latest-Linux-armv7l.sh
+
+sudo nano /home/pi/.bashrc
+export PATH="/home/pi/miniconda3/bin:$PATH"
+
+conda config --add channels rpi
+
+conda install python=3.6
+
+conda install ipython
+conda install numpy
+conda install matplotlib
+
+sudo apt install python3-gpiozero
+pip install RPi.GPIO
+pip install gpiozero
+
+
+# installing pygame
+sudo apt-get install build-essential libfreeimage-dev libopenal-dev libpango1.0-dev libsndfile-dev libudev-dev libasound2-dev libjpeg8-dev libtiff5-dev libwebp-dev automake
+# got to cd Downloads
+sudo apt install libsdl2-2.0-0 libsdl2-dev libsdl2-ttf-2.0-0 libsdl2-ttf-dev
+wget https://www.libsdl.org/release/SDL2-2.0.3.tar.gz
+tar zxvf SDL2-2.0.3.tar.gz
+cd SDL2-2.0.3 && mkdir build && cd build
+../configure --disable-pulseaudio --disable-esd --disable-video-mir --disable-video-wayland --disable-video-x11 --disable-video-opengl
+make -j 4
+sudo make install
+
