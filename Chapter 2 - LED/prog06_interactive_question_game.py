@@ -57,7 +57,9 @@ while True:
         press = True
         country = random.choice(list(qa.keys()))
         city    = qa[country]
+        wrong_answers = list(qa.values())
+        wrong_answers.remove(city)
         print(question(country))
         print('='*10)
-        print(options(city, list(qa.values())))
+        print(options(city, wrong_answers))
         print('='*10)
