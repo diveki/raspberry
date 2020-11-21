@@ -14,6 +14,7 @@ angle_max = 90
 motor = AngularServo(18, min_angle = angle_min, max_angle=angle_max)
 button_quit = Button(22)
 
+motor.angle = None
 yes_angle = -45
 no_angle = 45
 maybe_angle = 0
@@ -47,9 +48,9 @@ def check_for_words(txt, word_list = question_words):
 
 def answer_the_question(motor, angle_list):
     answer = random.choice(angle_list)
+    print(answer)
     motor.angle = answer
-    while motor.is_active:
-        pass
+    time.sleep(1)
     motor.angle = None
 
 
@@ -64,3 +65,4 @@ while True:
         print('*'*10 + '\n')
         continue
     answer_the_question(motor, angle_list)
+    
