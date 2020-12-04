@@ -1,66 +1,33 @@
-from gpiozero import Servo, AngularServo, Button
-import unidecode  # pip or conda install might be needed
-import sys, random
+
+import subprocess
 import time
+from stepper_motor import StepperMotor
 
-# determine the angle range for the servo
-# motor = Servo(18)
-# motor.min()  # measure angle
-# motor.max()  # measure angle again
+m = StepperMotor(1,2,3,4)
 
-angle_min = -90
-angle_max = 90
+data = [{'name':'Phone1', 'mac':"4a-c0-56-a9-1a-46", 'ip':'192.168.0.166'},
+        {'name':'Phone2', 'mac':"4a-c0-56-a9-1a-44", 'ip':'192.168.0.132'}
+]
+alone = True
 
-motor = AngularServo(18, min_angle = angle_min, max_angle=angle_max)
-button_quit = Button(22)
-
-yes_angle = -45
-no_angle = 45
-maybe_angle = 0
-angle_list = [yes_angle, no_angle, maybe_angle]
-
-
-question_words = ['hogy', 'hogyan', 'miként', 'hol', 'kinél', 'kitől', 'hol', 'honnan', 
-                    'honnét', 'hová', 'hova', 'Meddig', 'Merre', 'Mettől', 'Minél',
-                    'Mitől', 'Ki', 'Kié', 'Kiért', 'Kiig', 'Kihez', 'Kiként', 'Kinek',
-                    'Kitől', 'Kivel', 'Mennyi', 'Hány', 'Mi', 'Mié', 'Miért', 'Miig',
-                    'Mihez', 'Miként', 'Minek', 'Mitől', 'Mivel', 'Mikor', 'Hánykor',
-                    'Hányig', 'Hánytól', 'Meddig', 'Mettől', 'Mikor', 'Mikortól', 
-                    'Milyen']
-
-
-def exit_program():
-    sys.exit(0)
-
-# check if the question contains any of the above words
-def check_for_words(txt, word_list = question_words):
-    txt = txt.lower()
-    txt = unidecode.unidecode(txt)
-    txt = txt.replace('?','')
-    txt_list = txt.split(' ')
-
-    for word in word_list:
-        wl = unidecode.unidecode(word.lower())
-        if wl in txt_list:
-            return True
-    return False
-
-def answer_the_question(motor, angle_list):
-    answer = random.choice(angle_list)
-    motor.angle = answer
-    while motor.is_active:
-        pass
-    motor.angle = None
-
-
-button_quit.when_pressed = exit_program
+def test(ip):
+    p=subprocess.Popen(f'ping {ip}', shell=True, stdout=subprocess.PIPE)
+    p.wait()
+    output=p.stdout.read()
+    return output
 
 while True:
-    txt = input('Mire vagy kíváncsi halandó?\n\t')
-    proper = check_for_words(txt)
-    if proper:
-        print('*'*10)
-        print('Olyan kérdést tegyél fel, amire igennel, nemmel vagy talánnal tudok válaszolni!')
-        print('*'*10 + '\n')
-        continue
-    answer_the_question(motor, angle_list)
+    print("starting loop")
+    output = subprocess.check_output("arp -a", shell=True)
+    print ("starting scan")
+    for item in data:
+        if item['mac'] in output.decode():
+            test(item['ip'])
+            print(f'{item['name']} is at home')
+            if alone:
+                m.forward(speed=1, angle=180)
+                alone = False
+                time.sleep(2)
+        else:
+            alone = True
+    time.sleep(5)
