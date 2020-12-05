@@ -3,31 +3,34 @@ import subprocess
 import time
 from stepper_motor import StepperMotor
 
-m = StepperMotor(1,2,3,4)
+m = StepperMotor(12,16,20,21)
 
 data = [{'name':'Phone1', 'mac':"4a-c0-56-a9-1a-46", 'ip':'192.168.0.166'},
         {'name':'Phone2', 'mac':"4a-c0-56-a9-1a-44", 'ip':'192.168.0.132'}
 ]
-alone = True
 
 def test(ip):
-    p=subprocess.Popen(f'ping {ip}', shell=True, stdout=subprocess.PIPE)
+    p=subprocess.Popen(f'ping -W 2 -c 3 {ip}', shell=True, stdout=subprocess.PIPE)
     p.wait()
     output=p.stdout.read()
     return output
 
 while True:
+    people_at_home = 0
     print("starting loop")
     output = subprocess.check_output("arp -a", shell=True)
     print ("starting scan")
     for item in data:
-        if item['mac'] in output.decode():
-            test(item['ip'])
-            print(f'{item['name']} is at home')
-            if alone:
-                m.forward(speed=1, angle=180)
-                alone = False
-                time.sleep(2)
-        else:
-            alone = True
+        test(item['ip'])
+        if item['mac'] in output.decode() or item['mac'].replace('-',':') in output.decode():
+            people_at_home = people_at_home + 1
+    
+    if people_at_home == 0:
+        if m.angle == 180:
+            m.backward(speed=1, angle=180)
+    else:
+        if m.angle == 0:  # 0 degree is alone position
+            m.forward(speed=1, angle=180)
+            time.sleep(2)
+    
     time.sleep(5)

@@ -10,9 +10,9 @@ class StepperMotor:
                 [0,0,1,0],
                 [0,0,1,1],
                 [0,0,0,1]]
-    stride_angle = 5.625  # degree
-    rotation_per_step = 1/64
-
+    rotation_per_step = 1/(2038*2)
+    stride_angle = 410 * rotation_per_step  # degree
+    
     def __init__(self, pin1, pin2, pin3, pin4):
         self.pin1 = stepper(pin1)
         self.pin2 = stepper(pin2)
@@ -22,6 +22,7 @@ class StepperMotor:
         self.step_count = len(self.sequence)
         self.step_direction = 1
         self.wait_time = 0.001
+        self.angle = 0
 
     def _move_continuous(self):
         step_counter = 0
@@ -71,6 +72,7 @@ class StepperMotor:
                 pass
             else:
                 self.set_step_number(angle)
+                self.set_angle(angle)
                 self._move_discrete()
         else:
             self._move_continuous()
@@ -83,6 +85,7 @@ class StepperMotor:
                 pass
             else:
                 self.set_step_number(angle)
+                self.set_angle(angle)
                 self._move_discrete()
         else:
             self._move_continuous()
@@ -99,6 +102,9 @@ class StepperMotor:
     def set_step_number(self, angle):
         self.steps_to_make = round(angle / self.stride_angle)
 
+    def set_angle(self, angle):
+        self.angle = self.angle + self.step_direction*angle
+		
     def stop(self):
         for pin in self.pins:
             pin.off()

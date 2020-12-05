@@ -1,10 +1,10 @@
 import time 
 from gpiozero import OutputDevice as stepper
 
-IN1 = stepper(25)
-IN2 = stepper(8)
-IN3 = stepper(7)
-IN4 = stepper(11)
+IN1 = stepper(12)
+IN2 = stepper(16)
+IN3 = stepper(20)
+IN4 = stepper(21)
 
 step_pins = [IN1, IN2, IN3, IN4]
 
@@ -18,7 +18,7 @@ sequence = [[1,0,0,1],
 
 step_count = len(sequence)
 step_dir = 1
-wait_time = 0.01
+wait_time = 0.001
 step_counter = 0
 
 while True:
