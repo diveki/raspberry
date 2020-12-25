@@ -23,6 +23,7 @@ pip install gpiozero
 
 # setup vnc
 https://www.raspberrypi.org/documentation/remote-access/vnc/
+Menu/Preferences/Raspberry Pi Configuration/Interfaces -> enable all
 
 
 # installing pygame
