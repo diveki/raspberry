@@ -12,7 +12,7 @@ device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
 
 filename = 'test.csv'
-duration = 10  # given in seconds
+duration = 30  # given in seconds
  
 def read_temp_raw():
     f = open(device_file, 'r')
