@@ -22,6 +22,7 @@ def read_temp_raw():
  
 def read_temp():
     lines = read_temp_raw()
+    now = dt.datetime.today().strftime('%Y-%m-%d %H:%M:%S')
     while lines[0].strip()[-3:] != 'YES':
         time.sleep(0.2)
         lines = read_temp_raw()
@@ -30,26 +31,25 @@ def read_temp():
         temp_string = lines[1][equals_pos+2:]
         temp_c = float(temp_string) / 1000.0
         temp_f = temp_c * 9.0 / 5.0 + 32.0
-        return temp_c, temp_f
+        return temp_c, temp_f, now
 
 def write2file(txt,filename='temperature.csv'):
 	f = open(filename, 'a')
 	f.write(txt)
 	f.close()
 	
-def prepare2save(tc,tf):
-	now = dt.datetime.today().strftime('%Y-%m-%d %H:%M:%S')
-	txt = now + ',' + str(round(tc,2)) + ',' + str(round(tf,2)) + '\n'
+def prepare2save(tc,tf,ts):
+	txt = ts + ',' + str(round(tc,2)) + ',' + str(round(tf,2)) + '\n'
 	return txt
 	
 t0 = time.time()
 t1 = time.time()
 
 while t1 - t0 < duration:
-	tc, tf = read_temp()
+	tc, tf, ts = read_temp()
 	t1 = time.time()
 	print(t1-t0)
-	text = prepare2save(tc, tf)
+	text = prepare2save(tc, tf, ts)
 	write2file(text, filename=filename)
 	time.sleep(1)
 	
