@@ -8,7 +8,7 @@ button_start = Button(17)
 
 def start(button, m):
     t_rot = random.uniform(0, 5)
-    speed = random.uniform(0.6, 1)
+    speed = random.uniform(0.8, 1)
     m.forward(speed=speed)
     time.sleep(t_rot)
     m.stop()
