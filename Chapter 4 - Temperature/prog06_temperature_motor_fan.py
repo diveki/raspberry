@@ -35,3 +35,4 @@ while True:
 	ventillation(motor, t,h)
 	time.sleep(0.5)
 	
+
