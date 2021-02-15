@@ -1,0 +1,4 @@
+Hello World
+Felkészultel a homerseklet kiolvasasara?
+Lehet tobb sort is be kellene olvasni.
+Jo buli lesz.
