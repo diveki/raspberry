@@ -14,18 +14,18 @@ device_file = device_folder + '/w1_slave'
 filename = 'test.csv'
 duration = 30  # given in seconds
  
-def read_temp_raw():
-    f = open(device_file, 'r')
+def read_temp_raw(file_name):
+    f = open(file_name, 'r')
     lines = f.readlines()
     f.close()
     return lines
  
-def read_temp():
-    lines = read_temp_raw()
+def read_temp(file_name):
+    lines = read_temp_raw(file_name)
     now = dt.datetime.today().strftime('%Y-%m-%d %H:%M:%S')
     while lines[0].strip()[-3:] != 'YES':
         time.sleep(0.2)
-        lines = read_temp_raw()
+        lines = read_temp_raw(file_name)
     equals_pos = lines[1].find('t=')
     if equals_pos != -1:
         temp_string = lines[1][equals_pos+2:]
@@ -46,7 +46,7 @@ t0 = time.time()
 t1 = time.time()
 
 while t1 - t0 < duration:
-	tc, tf, ts = read_temp()
+	tc, tf, ts = read_temp(device_file)
 	t1 = time.time()
 	print(t1-t0)
 	text = prepare2save(tc, tf, ts)
