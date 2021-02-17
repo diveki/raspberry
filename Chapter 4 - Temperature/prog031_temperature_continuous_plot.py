@@ -11,18 +11,18 @@ device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
 
  
-def read_temp_raw():
-    f = open(device_file, 'r')
+def read_temp_raw(file_name):
+    f = open(file_name, 'r')
     lines = f.readlines()
     f.close()
     return lines
  
-def read_temp():
-    lines = read_temp_raw()
+def read_temp(file_name):
+    lines = read_temp_raw(file_name)
     now = dt.datetime.today().strftime('%Y-%m-%d %H:%M:%S')
     while lines[0].strip()[-3:] != 'YES':
         time.sleep(0.2)
-        lines = read_temp_raw()
+        lines = read_temp_raw(file_name)
     equals_pos = lines[1].find('t=')
     if equals_pos != -1:
         temp_string = lines[1][equals_pos+2:]
@@ -57,7 +57,7 @@ plt.grid(True)
 
 
 while True:
-	tc, tf, ts = read_temp()
+	tc, tf, ts = read_temp(device_file)
 	print(ts)
 	dplot, tplot = prepare_data(ts, tc, dplot, tplot, maxlen=max_count)
 	
