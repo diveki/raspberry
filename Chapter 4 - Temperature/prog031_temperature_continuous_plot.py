@@ -32,11 +32,11 @@ def read_temp(file_name):
 
 def prepare_data(date, tc, dplot, tplot, maxlen=20):
 	dd = dt.datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
+	dplot.append(dd)
+	tplot.append(tc)
 	if len(dplot) > maxlen:
 		dplot.pop(0)
 		tplot.pop(0)
-	dplot.append(dd)
-	tplot.append(tc)
 	return dplot, tplot
 	
 
