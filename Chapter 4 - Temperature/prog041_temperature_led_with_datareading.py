@@ -1,6 +1,7 @@
 from gpiozero import MCP3008, LED
 import numpy as np
 from scipy.interpolate import interp1d
+from temperature_functions import read_temp_raw
 
 
 mcp = MCP3008(channel=7)
@@ -8,10 +9,9 @@ red = LED(21)
 yellow = LED(20)
 green = LED(16)
 
+
 def read_mapping(name):
-	f = open(name, 'r')
-	data = f.readlines()
-	f.close()
+	data = read_temp_raw(name)
 	data.pop(0)
 	tc = []
 	r = []
