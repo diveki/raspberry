@@ -1,3 +1,4 @@
+# pip install pygame==1.9.4
 from gpiozero import Motor, Button
 import sys, pygame, pygame.freetype
 import time
