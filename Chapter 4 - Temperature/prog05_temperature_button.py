@@ -1,7 +1,8 @@
 from gpiozero import MCP3008, Button
 import numpy as np
-from scipy.interpolate import interp1d
 import sys,time
+from scipy.interpolate import interp1d
+from temperature_functions import read_temp_raw
 
 
 mcp = MCP3008(channel=7)
@@ -9,9 +10,7 @@ button = Button(2)
 
 
 def read_mapping(name):
-	f = open(name, 'r')
-	data = f.readlines()
-	f.close()
+	data = read_temp_raw(name)
 	data.pop(0)
 	tc = []
 	r = []
