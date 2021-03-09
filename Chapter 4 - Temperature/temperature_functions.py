@@ -17,4 +17,25 @@ def read_temp(file_name):
         temp_c = float(temp_string) / 1000.0
         temp_f = temp_c * 9.0 / 5.0 + 32.0
         return temp_c, temp_f
+
+def get_temp(dev):
+	try:
+		t = dev.temperature
+	except:
+		t = 0
+	return t
+
+def get_hum(dev):
+	try:
+		hum = dev.humidity
+	except:
+		hum = 0
+	return hum
+
+def ventillation(m, temp, hum):
+	if temp and hum:
+		if temp > 30 or hum > 50:
+			m.forward()
+		else:
+			m.stop()
 	

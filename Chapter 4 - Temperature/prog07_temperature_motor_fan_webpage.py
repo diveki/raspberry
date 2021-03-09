@@ -11,6 +11,7 @@ import cloud4rpi
 import rpi
 import adafruit_dht
 from gpiozero import Motor
+from temperature_functions import get_hum, get_temp, ventillation
 
 # Put your device token here. To get the token,
 # sign up at https://cloud4rpi.io and create a device.
@@ -28,30 +29,9 @@ motor = Motor(23,24,25)
 last_update = time.time()-10
 
 
-def get_temp(dev):
-	try:
-		t = dev.temperature
-	except:
-		t = 0
-	return t
-
-def get_hum(dev):
-	try:
-		hum = dev.humidity
-	except:
-		hum = 0
-	return hum
-
 def get_motor_status(m):
 	return m.is_active
-	
-def ventillation(m, temp, hum):
-	if temp and hum:
-		if temp > 30 or hum > 50:
-			m.forward()
-		else:
-			m.stop()
-			
+
 			
 def main():
 
