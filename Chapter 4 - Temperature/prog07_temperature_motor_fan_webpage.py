@@ -1,4 +1,5 @@
 # register on cloud4rpi
+# kiralysandor123@gmail.com
 # sudo pip install cloud4rpi
 # https://github.com/cloud4rpi/cloud4rpi-raspberrypi-python
 # https://cloud4rpi.io/raspberry-pi-projects/humidity-in-the-cloud
