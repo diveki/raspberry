@@ -16,10 +16,12 @@ conda install python=3.6
 conda install ipython
 conda install numpy
 conda install matplotlib
+conda install -c anaconda flask
 
 sudo apt install python3-gpiozero
 pip install RPi.GPIO
 pip install gpiozero
+
 
 # setup vnc
 https://www.raspberrypi.org/documentation/remote-access/vnc/
@@ -27,7 +29,11 @@ Menu/Preferences/Raspberry Pi Configuration/Interfaces -> enable all
 
 
 # installing pygame
-sudo apt-get install build-essential libfreeimage-dev libopenal-dev libpango1.0-dev libsndfile-dev libudev-dev libasound2-dev libjpeg8-dev libtiff5-dev libwebp-dev automake
+sudo apt install libsdl1.2-dev
+
+sudo apt-get install build-essential libfreeimage-dev libopenal-dev libpango1.0-dev libsndfile-dev libudev-dev libasound2-dev libjpeg9-dev
+sudo apt-get install libtiff5-dev libwebp-dev automake
+
 # got to cd Downloads
 sudo apt install libsdl2-2.0-0 libsdl2-dev libsdl2-ttf-2.0-0 libsdl2-ttf-dev
 wget https://www.libsdl.org/release/SDL2-2.0.3.tar.gz
@@ -37,3 +43,44 @@ cd SDL2-2.0.3 && mkdir build && cd build
 make -j 4
 sudo make install
 
+# opencv
+https://qengineering.eu/install-opencv-4.5-on-raspberry-pi-4.html
+https://www.scivision.dev/anaconda-python-opencv3/
+https://github.com/ys7yoo/PiOpenCV
+
+####################################################
+
+
+
+https://raspberrypi.stackexchange.com/questions/124226/install-pygame-with-miniconda3-on-raspberry-pi-4
+
+https://stackoverflow.com/questions/67195527/install-pygame-with-miniconda3-on-raspberry-pi-4
+
+
+################################
+
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+-D CMAKE_INSTALL_PREFIX=$(python -c "import sys; print(sys.prefix)") \
+-D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
+-D ENABLE_NEON=ON \
+-D ENABLE_VFPV3=ON \
+-D PYTHON3_EXECUTABLE=$(python -c "import sys; print(sys.executable)") \
+-D PYTHON3_INCLUDE_DIR=$(python -c "import sysconfig; print(sysconfig.get_config_var('INCLUDEPY'))") \
+-D PYTHON3_PACKAGES_PATH=$(python -c "import sysconfig; print(sysconfig.get_config_var('LIBDEST'))") \
+-D PYTHON_DEFAULT_EXECUTABLE=$(which python3) \
+-D PYTHON3_LIBRARY=$(python -c "import sysconfig; print('%s/%s' % (sysconfig.get_config_var('LIBDIR'), sysconfig.get_config_var('INSTSONAME')))") \
+-D PYTHON_LIBRARY=$(python -c "import sysconfig; print('%s/%s' % (sysconfig.get_config_var('LIBDIR'), sysconfig.get_config_var('INSTSONAME')))") \
+-D BUILD_TESTS=OFF \
+-D WITH_EIGEN=OFF \
+-D WITH_V4L=ON \
+-D WITH_LIBV4L=ON \
+-D OPENCV_ENABLE_NONFREE=ON \
+-D INSTALL_C_EXAMPLES=OFF \
+-D INSTALL_PYTHON_EXAMPLES=OFF \
+-D BUILD_NEW_PYTHON_SUPPORT=ON \
+-D BUILD_opencv_python3=ON \
+-D BUILD_opencv_python2=OFF \
+-D OPENCV_GENERATE_PKGCONFIG=ON \
+-D BUILD_EXAMPLES=OFF ..
+
+#################

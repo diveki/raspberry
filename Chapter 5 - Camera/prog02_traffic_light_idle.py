@@ -14,11 +14,13 @@ while True:
     ret, frame = cap.read()
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     light = np.mean(frame) / 255
-    # print(light)
+    print(light)
     if light < 0.3:
         red.off()
         green.off()
-        yellow.blink()
+        yellow.on()
+        time.sleep(0.5)
+        yellow.off()
     else:
         traffic_light_sequence(red, yellow, green)
     time.sleep(0.2)

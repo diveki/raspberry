@@ -55,19 +55,18 @@ plt.title("Dynamic Plot of temperature",fontsize=25)
 
 
 while True:
-    # button.wait_for_press()
     ret, frame1 = cap.read()
     frame1 = frame2grayscale(frame1)
     frame1 = hist_equalizer(frame1)
 
     delta_frame = frame1-frame
     ret, delta_frame = cv2.threshold(delta_frame,2,255,cv2.THRESH_BINARY)
-    ax[0].imshow(delta_frame)
+#    ax[0].imshow(delta_frame)
     
     frame_mean = motion_sensor(delta_frame, calibration)
     dplot, tplot = prepare_data(dt.datetime.now(), frame_mean, dplot, tplot)
 
-    led_control(led, frame_mean, threshold=0.8)
+#    led_control(led, frame_mean, threshold=0.8)
     frame = frame1
 
     line1.set_xdata(dplot)

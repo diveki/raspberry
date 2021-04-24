@@ -2,8 +2,7 @@ from flask import Flask, render_template, Response
 import cv2
 
 app = Flask(__name__)
-cap = cv2.VideoCapture(0)
-
+#print(cap.isOpened())
 
 @app.route('/')
 def index():
@@ -13,7 +12,7 @@ def index():
 def gen(camera):
     while True:
         #get camera frame
-        ret, frame = cap.read()
+        ret, frame = camera.read()
         ret, frame = cv2.imencode('.jpg', frame)
         frame = frame.tobytes()
         yield (b'--frame\r\n'
@@ -21,6 +20,8 @@ def gen(camera):
 
 @app.route('/video_feed')
 def video_feed():
+    cap = cv2.VideoCapture('/dev/video0')
+    cap.open('/dev/video0')
     return Response(gen(cap),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 

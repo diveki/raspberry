@@ -1,4 +1,5 @@
 #### Chapter 4 - Temperature functions
+from time import sleep 
 
 def read_temp_raw(file_name):
     f = open(file_name, 'r')
@@ -42,14 +43,14 @@ def ventillation(m, temp, hum):
 
 # Chapter 5 - Camera functions
 
-def traffic_light_sequence(red, yellow, green):
-    sleep(10)
+def traffic_light_sequence(red, amber, green, dt = 3):
+    sleep(dt)
     green.off()
     amber.on()
     sleep(1)
     amber.off()
     red.on()
-    sleep(10)
+    sleep(dt)
     amber.on()
     sleep(1)
     green.on()
