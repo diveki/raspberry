@@ -13,6 +13,7 @@ conda config --add channels rpi
 sudo chown -R pi miniconda3/
 conda install python=3.6
 
+sudo ln -s /home/pi/miniconda3/etc/profile.d/conda.sh /etc/profile.d/conda.sh
 conda install ipython
 conda install numpy
 conda install matplotlib
@@ -30,18 +31,11 @@ Menu/Preferences/Raspberry Pi Configuration/Interfaces -> enable all
 
 # installing pygame
 sudo apt install libsdl1.2-dev
-
 sudo apt-get install build-essential libfreeimage-dev libopenal-dev libpango1.0-dev libsndfile-dev libudev-dev libasound2-dev libjpeg9-dev
 sudo apt-get install libtiff5-dev libwebp-dev automake
+sudo apt-get install python-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev   libsdl1.2-dev libsmpeg-dev python-numpy subversion libportmidi-dev ffmpeg libswscale-dev libavformat-dev libavcodec-dev
+pip install pygame==1.9.4
 
-# got to cd Downloads
-sudo apt install libsdl2-2.0-0 libsdl2-dev libsdl2-ttf-2.0-0 libsdl2-ttf-dev
-wget https://www.libsdl.org/release/SDL2-2.0.3.tar.gz
-tar zxvf SDL2-2.0.3.tar.gz
-cd SDL2-2.0.3 && mkdir build && cd build
-../configure --disable-pulseaudio --disable-esd --disable-video-mir --disable-video-wayland --disable-video-x11 --disable-video-opengl
-make -j 4
-sudo make install
 
 # opencv
 https://qengineering.eu/install-opencv-4.5-on-raspberry-pi-4.html
