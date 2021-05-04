@@ -1,19 +1,18 @@
 from gpiozero import LED
 import cv2, time
 import numpy as np
-import matplotlib.pyplot as plt
 from raspberry_functions import traffic_light_sequence
 
-red    = LED(16)
-yellow = LED(20)
-green  = LED(21)
+red    = LED(17)
+yellow = LED(27)
+green  = LED(22)
 cap    = cv2.VideoCapture(0)
 
 
 while True:
     ret, frame = cap.read()
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    light = np.mean(frame) / 255
+    light = np.mean(frame) / 256
     print(light)
     if light < 0.3:
         red.off()
