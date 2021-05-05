@@ -44,11 +44,11 @@ while True:
     frame1 = cv2.equalizeHist(frame1)
 
     delta_frame = frame1-frame    
-    frame_mean = motion_sensor(delta_frame, calibration)
+    motion = motion_sensor(delta_frame, calibration)
 
-    dplot, tplot = prepare_data(dt.datetime.now(), frame_mean, dplot, tplot)
+    dplot, tplot = prepare_data(dt.datetime.now(), motion, dplot, tplot)
 
-#    led_control(led, frame_mean, threshold=0.8)
+    led_control(led, motion, threshold=0.8)
     frame = frame1
 
     line1.set_xdata(dplot)
