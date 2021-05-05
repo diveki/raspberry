@@ -56,3 +56,14 @@ def traffic_light_sequence(red, amber, green, dt = 3):
     green.on()
     amber.off()
     red.off()	
+
+def prepare_data(date, value, dplot, tplot, maxlen=20):
+	dplot.append(date)
+	tplot.append(value)
+	if len(dplot) > maxlen:
+		dplot.pop(0)
+		tplot.pop(0)
+	return dplot, tplot
+
+def frame2grayscale(frame):
+    return cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)

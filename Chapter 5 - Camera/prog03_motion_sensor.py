@@ -1,69 +1,51 @@
-import cv2, time, subprocess
+import cv2, time
 import numpy as np
 import datetime as dt
 import matplotlib.pyplot as plt
 from gpiozero import LED
+from raspberry_functions import prepare_data, frame2grayscale
 
 cap = cv2.VideoCapture(0)
 led = LED(2)
 
 
-def motion_sensor(frame, calibration):
+def motion_sensor(frame, calibration, limit=2):
+    ret, frame = cv2.threshold(frame, limit, 255, cv2.THRESH_BINARY)
     return np.sum(frame) / calibration
 
-def prepare_data(date, value, dplot, tplot, maxlen=20):
-	dplot.append(date)
-	tplot.append(value)
-	if len(dplot) > maxlen:
-		dplot.pop(0)
-		tplot.pop(0)
-	return dplot, tplot
-
-def frame2grayscale(frame):
-    return cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-def hist_equalizer(img):
-    return cv2.equalizeHist(img)
-
 def led_control(led, value, threshold = 0.8):
-    if value > 0.8:
+    if value > threshold:
         led.on()
     else:
         led.off()
 
 
-ret, frame = cap.read()
-frame = frame2grayscale(frame)
-frame = hist_equalizer(frame)
-
 height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
-calibration = np.product((height, width)) * 255
+calibration = height * width * 256
+
+ret, frame = cap.read()
+frame = frame2grayscale(frame)
+frame = cv2.equalizeHist(frame)
 
 max_count = 20
 dplot = [dt.datetime.now()]
-tplot = [np.sum(frame)/calibration]		
+tplot = [motion_sensor(frame, calibration)]		
 	
 plt.ion()
 
-figure, ax = plt.subplots(2,1, figsize=(8,6))
-ax[0].imshow(frame)
-line1, = ax[1].plot(dplot, tplot, 'o-')
-
-plt.title("Dynamic Plot of temperature",fontsize=25)
-
+figure, ax = plt.subplots(1,1, figsize=(8,6))
+line1, = ax.plot(dplot, tplot, 'o-')
 
 
 while True:
     ret, frame1 = cap.read()
     frame1 = frame2grayscale(frame1)
-    frame1 = hist_equalizer(frame1)
+    frame1 = cv2.equalizeHist(frame1)
 
-    delta_frame = frame1-frame
-    ret, delta_frame = cv2.threshold(delta_frame,2,255,cv2.THRESH_BINARY)
-#    ax[0].imshow(delta_frame)
-    
+    delta_frame = frame1-frame    
     frame_mean = motion_sensor(delta_frame, calibration)
+
     dplot, tplot = prepare_data(dt.datetime.now(), frame_mean, dplot, tplot)
 
 #    led_control(led, frame_mean, threshold=0.8)
@@ -71,8 +53,8 @@ while True:
 
     line1.set_xdata(dplot)
     line1.set_ydata(tplot)
-    ax[1].set_ylim(min(tplot)*0.99,max(tplot)*1.01) # +1 to avoid singular transformation warning
-    ax[1].set_xlim(min(dplot),max(dplot))
+    ax.set_ylim(min(tplot)*0.99,max(tplot)*1.01) # +1 to avoid singular transformation warning
+    ax.set_xlim(min(dplot),max(dplot))
     figure.canvas.draw()
     figure.canvas.flush_events()
     plt.gcf().autofmt_xdate()
