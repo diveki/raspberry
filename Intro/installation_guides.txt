@@ -23,6 +23,7 @@ conda install -c anaconda unidecode
 sudo apt install python3-gpiozero
 pip install RPi.GPIO
 pip install gpiozero
+sudo pip install tweepy
 
 
 # setup vnc
