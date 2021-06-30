@@ -1,5 +1,6 @@
 # In the Settings tab, change the Application type to Read, Write and Access direct messages
 # In the Reset keys tab, press the Reset button, update the consumer key and secret in your application accordingly.
+# makesquare_test twitter account
 
 import cv2, time
 import numpy as np
@@ -44,7 +45,7 @@ def action():
     # hivd meg a snapshot fuggvenyt hogy keszitsen kepet es kivalassza a hozzaillo textet
     text = 
     # hivd meg a send_tweet fuggvenyt hogy posztolj a twitteren
-    se
+    se...
     print('Tweet has been sent!')
 
 # rendeld hozza a megfelelo muveletet a nyomogombhoz

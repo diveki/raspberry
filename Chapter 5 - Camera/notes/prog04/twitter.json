@@ -1,0 +1,7 @@
+{
+    "consumer_key": "password",
+    "consumer_secret": "difficult_password",
+    "access_token": "incredible_password",
+    "access_token_secret": "ultrasecure_password",
+    "bearer_token": "not_a_password"
+}
