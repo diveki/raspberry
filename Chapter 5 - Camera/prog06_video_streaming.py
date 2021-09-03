@@ -20,8 +20,10 @@ def gen(camera):
 
 @app.route('/video_feed')
 def video_feed():
-    cap = cv2.VideoCapture('/dev/video0')
-    cap.open('/dev/video0')
+    # cap = cv2.VideoCapture('/dev/video0')
+    cap = cv2.VideoCapture(0)
+    # cap.open('/dev/video0')
+    cap.open(0)
     return Response(gen(cap),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
