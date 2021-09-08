@@ -24,6 +24,7 @@ sudo apt install python3-gpiozero
 pip install RPi.GPIO
 pip install gpiozero
 sudo pip install tweepy
+sudo pip install cloud4rpi
 
 
 # setup vnc
