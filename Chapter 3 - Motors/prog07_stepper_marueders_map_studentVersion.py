@@ -9,11 +9,6 @@ data = [{'name':'Phone1', 'mac':"4a-c0-56-a9-1a-46", 'ip':'192.168.0.166'},
         {'name':'', 'mac':"", 'ip':''}     # toltsd ki az eszkoz nevet, mac cimet, ip cimet string formatumban
 ]
 
-# def test(ip):
-#     p=subprocess.Popen(f'ping -W 2 -c 3 {ip}', shell=True, stdout=subprocess.PIPE)
-#     p.wait()
-#     output=p.stdout.read()
-#     return output
 
 while True:
     people_at_home = 0
@@ -21,7 +16,6 @@ while True:
     output = subprocess.check_output(......., shell=True)   # a pontok helyere ird be az arp paranccsal valo vegrehajtast
     print ("starting scan")
     for item in data:
-        # test(item['ip'])
         outp = subprocess.check_output(f'ping -W 2 -c 3 {......}', shell=True)   # a pontok helyere ird hivd meg az item valtozo ip cimet
         if item['mac'] in output.decode() or item['mac'].replace('-',':') in output.decode():  # 
             people_at_home = people_at_home + 1
