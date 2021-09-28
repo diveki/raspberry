@@ -26,6 +26,33 @@ pip install gpiozero
 sudo pip install tweepy
 sudo pip install cloud4rpi
 
+##### Thermisztorok
+  Raspbian Buster vagy fiatalabb verzi
+pip install spidev
+pip install adafruit-blinka
+pip install adafruit-circuitpython-dht
+sudo apt-get install libgpiod2
+A terminalba gepeljük be, hogy ls -l /dev/spi* ; ha latszik a /dev/spidev0.0 és /dev/spidev0.1 akkor minden rendben van.
+
+A One-Wire protokol aktivalasa a Raspberry Pi-n
+
+1) terminalban irjuk be, hogy sudo nano /boot/config.txt, majd a megnyitott fajl utolso soraba irjuk be a kovetkezot:
+
+2) dtoverlay=w1-gpio
+
+3) Nano editor becsuk,  Raspberry Pi-t ujrainditani,a terminalba sudo reboot.
+
+4) Ujrainditas utan nyissunk ki ujra egy terminalt es gepeljuk be: sudo modprobe w1-gpio
+
+5) Aztan: sudo modprobe w1-therm
+
+6) Ezutan mennyunk at abba a mappaba, ahova a kulso eszkozok talalhatok: cd /sys/bus/w1/devices
+
+7)  ls.  itt egy mappa ami hasonlit a 28-XXXXXXXXXXXX  A 28 a szenzor csalad azonoso. A DS1820 és DS18S20 csalad azonositoja 10, valamint a DS1822 azonositoja a 22. 
+
+8) A mappaban kell, hogy legyen egy w1_slave nevu fajl, megtekintsuk a tartalmat, gepeljuk be, hogy cat w1_slave
+#################################
+
 
 # setup vnc
 https://www.raspberrypi.org/documentation/remote-access/vnc/
