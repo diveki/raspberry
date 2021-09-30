@@ -27,6 +27,7 @@ conda install -c anaconda unidecode
 
 sudo apt install python3-gpiozero
 pip install --upgrade pip
+sudo apt-get install --yes libatlas-base-dev gfortran
 conda install --yes -c anaconda scipy
 pip install RPi.GPIO
 pip install gpiozero
