@@ -13393,7 +13393,7 @@ div#notebook {
         <span class="k">return</span> <span class="n">temp_c</span><span class="p">,</span> <span class="n">temp_f</span><span class="p">,</span> <span class="n">now</span>      <span class="c1"># visszaadjuk a hőmérsékleteket és az időpontot</span>
     
 <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>                             <span class="c1"># indítunk egy végtelen ciklust</span>
-	<span class="n">tc</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">read_temp</span><span class="p">(</span><span class="n">device_file</span><span class="p">)</span> <span class="c1"># kiolvassuk a hőmérsékletet egy adott pillanatban</span>
+    <span class="n">tc</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">ts</span> <span class="o">=</span> <span class="n">read_temp</span><span class="p">(</span><span class="n">device_file</span><span class="p">)</span> <span class="c1"># kiolvassuk a hőmérsékletet egy adott pillanatban</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tc</span><span class="p">,</span> <span class="n">tf</span><span class="p">)</span>                   <span class="c1"># kinyomtatjuk a fenti értékeket</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>                       <span class="c1"># várunk egy másodpercet a következő mérés előtt</span>
 </pre></div>
