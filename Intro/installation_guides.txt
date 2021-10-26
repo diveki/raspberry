@@ -1,3 +1,8 @@
+# setup vnc
+https://www.raspberrypi.org/documentation/remote-access/vnc/
+Menu/Preferences/Raspberry Pi Configuration/Interfaces -> enable all
+
+
 miniconda install - 
   https://stackoverflow.com/questions/39371772/how-to-install-anaconda-on-raspberry-pi-3-model-b/56852714#56852714
 
@@ -54,9 +59,6 @@ A One-Wire protokol aktivalasa a Raspberry Pi-n
 #################################
 
 
-# setup vnc
-https://www.raspberrypi.org/documentation/remote-access/vnc/
-Menu/Preferences/Raspberry Pi Configuration/Interfaces -> enable all
 
 
 # installing pygame
