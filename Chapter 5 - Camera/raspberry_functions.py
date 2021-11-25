@@ -1,5 +1,6 @@
 #### Chapter 4 - Temperature functions
 from time import sleep 
+import numpy as np
 
 def read_temp_raw(file_name):
     f = open(file_name, 'r')
@@ -68,3 +69,19 @@ def prepare_data(date, value, dplot, tplot, maxlen=20):
 
 def frame2grayscale(frame):
     return cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+
+# Chapter 6 - IR functions
+
+def read_distance_calibration(name, header=True):
+    lines = read_temp_raw(file_name)
+    if header:
+        lines.pop(0)
+    distance = []
+    voltage = []
+    for line in lines:
+        if line.strip() != '':
+            data = line.strip().split(',')
+            voltage.append(float(data[0]))
+            distance.append(float(data[1]))
+    return np.array(voltage)
