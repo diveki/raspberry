@@ -112,8 +112,8 @@ class ActiveSensor:
 		print('Measurement started')
 		while not self.event.is_set():
 			dd = dt.datetime.now()
-			current_voltage = self.mcp.voltage
-			current_distance = interpolate1d(self.calib_volt, self.calib_distance, current_voltage)
+			self.current_voltage = self.mcp.voltage
+			self.current_distance = interpolate1d(self.calib_volt, self.calib_distance, current_voltage)
 			print(f'Current distance from object is: {current_distance:.2} cm')
 			self.prepare_data(dd, current_distance)
 			time.sleep(1)
