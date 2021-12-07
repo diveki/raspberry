@@ -7,10 +7,15 @@ conda install --yes -c anaconda flask
 conda install --yes -c anaconda unidecode
 
 sudo apt install python3-gpiozero
+pip install --upgrade pip
 pip install RPi.GPIO
 pip install gpiozero
 sudo pip install tweepy
 sudo pip install cloud4rpi
+
+# scipyhoz szukseges csomagok
+sudo apt-get install --yes libatlas-base-dev gfortran
+conda install --yes -c anaconda scipy
 
 ##### Thermisztorok
 pip install spidev
