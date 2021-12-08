@@ -73,6 +73,10 @@ def frame2grayscale(frame):
 # Chapter 6 - IR functions
 from scipy.interpolate import interp1d
 import numpy as np
+import threading
+import time
+import datetime as dt
+import matplotlib.pyplot as plt
 
 def read_2column_files(name, header=True):
     lines = read_temp_raw(name)
@@ -91,11 +95,14 @@ def interpolate1d(x, y, target):
 	f = interp1d(x,y)
 	return f(target)
 
+
 class ActiveSensor:
-	def __init__(self, led, mcp, calibname):
+	def __init__(self, led, mcp, calibname, sampling_rate=1):
 		self.led = led
 		self.mcp = mcp
 		self.calibfile = calibname
+		self.sampling_rate = sampling_rate
+		self.plot_length = 20
 		self.initialize_calibration(self.calibfile)
 		self.event = threading.Event()
 		self.event_plot = threading.Event()
@@ -113,10 +120,10 @@ class ActiveSensor:
 		while not self.event.is_set():
 			dd = dt.datetime.now()
 			self.current_voltage = self.mcp.voltage
-			self.current_distance = interpolate1d(self.calib_volt, self.calib_distance, current_voltage)
-			print(f'Current distance from object is: {current_distance:.2} cm')
-			self.prepare_data(dd, current_distance)
-			time.sleep(1)
+			self.current_distance = interpolate1d(self.calib_volt, self.calib_distance, self.current_voltage)
+			print(f'Current distance from object is: {self.current_distance:.2} cm')
+			self.prepare_data(dd, self.current_distance)
+			time.sleep(self.sampling_rate)
 		
 	def stop(self):
 		self.event.set()
@@ -126,10 +133,10 @@ class ActiveSensor:
 	def initialize_calibration(self, filename):
 		self.calib_volt, self.calib_distance = read_2column_files(filename, header=True)
 
-	def prepare_data(self, dd, yy, maxlen=20):
+	def prepare_data(self, dd, yy):
 		self.dlist.append(dd)
 		self.ylist.append(yy)
-		if len(self.dlist) > maxlen:
+		if len(self.dlist) > self.plot_length:
 			self.dlist.pop(0)
 			self.ylist.pop(0)
 
@@ -144,7 +151,7 @@ class ActiveSensor:
 
 	def start_plot(self):
 		self.event_plot.clear()
-		t = threading.Thread(target=self.start_measurement)
+		t = threading.Thread(target=self.plot_distance_thread)
 		t.start()
 
 	def stop_plot(self):
