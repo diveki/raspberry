@@ -134,11 +134,7 @@ class ActiveSensor:
 		self.calib_volt, self.calib_distance = read_2column_files(filename, header=True)
 
 	def prepare_data(self, dd, yy):
-		self.dlist.append(dd)
-		self.ylist.append(yy)
-		if len(self.dlist) > self.plot_length:
-			self.dlist.pop(0)
-			self.ylist.pop(0)
+		self.dlist, self.ylist = prepare_data(dd, yy, self.dlist, self.ylist, maxlen=self.plot_length)
 
 	def plot_initialize(self):
 		plt.ion()
