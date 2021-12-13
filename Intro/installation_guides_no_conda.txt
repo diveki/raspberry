@@ -7,6 +7,7 @@ pip install --upgrade pip
 pip install ipython
 nano .bashrc
 export PATH="/home/pi/.local/bin:$PATH"
+source ~/.bashrc
 
 pip install numpy
 pip install --upgrade numpy
