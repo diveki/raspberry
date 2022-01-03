@@ -42,7 +42,7 @@ def ventillation(m, temp, hum):
 
 
 # Chapter 5 - Camera functions
-import cv2
+#import cv2
 
 def traffic_light_sequence(red, amber, green, dt = 3):
     sleep(dt)

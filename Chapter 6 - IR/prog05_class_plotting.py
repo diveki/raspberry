@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('Qt5Agg')
 import threading
 import time
 from raspberry_functions import read_2column_files, interpolate1d
@@ -60,7 +62,7 @@ class ActiveSensor:
 
 	def start_plot(self):
 		self.event_plot.clear()
-		t = threading.Thread(target=self.start_measurement)
+		t = threading.Thread(target=self.plot_distance_thread)
 		t.start()
 
 	def stop_plot(self):
