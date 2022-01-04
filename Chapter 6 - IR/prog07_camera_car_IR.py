@@ -1,11 +1,9 @@
-# pip install pygame==1.9.4
-from gpiozero import Motor, Button
+from gpiozero import Motor, LED, MCP3008
 import numpy as np
 import sys, pygame, pygame.freetype
 import time, threading
 import cv2
 from raspberry_functions import read_2column_files, interpolate1d, ActiveSensor
-from gpiozero import LED, MCP3008
 
 # motor_left = Motor(forward=23, backward = 24, enable=25)  #
 # motor_right = Motor(forward=27, backward = 22, enable=17)  #
@@ -13,8 +11,8 @@ from gpiozero import LED, MCP3008
 ir = LED(2)
 mcp = MCP3008(channel=7)
 calib_file = 'ir_calibration.csv'
-sensor = ActiveSensor(ir, mcp, calib_file)
-cap = cv2.VideoCapture(0)
+sensor = ActiveSensor(ir, mcp, calib_file, print_distance=False)
+cap = cv2.VideoCapture('/dev/video0')
 
 pygame.init( )
 
@@ -49,7 +47,7 @@ class Car:
         self.check_thread.start()
 
     def start_camera(self):
-        while not self.stop_event:
+        while not self.stop_event.is_set():
             ret, frame = self.cap.read()
             frame = np.rot90(frame)
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -58,15 +56,13 @@ class Car:
             pygame.display.flip()
 
     def start_movement(self):
-        while not self.stop_event:
+        while not self.stop_event.is_set():
             for event in pygame.event.get():
-                # print(event)
                 if event.type == pygame.QUIT:
                     self.ir_sensor.stop()
                     self.stop_event.set()
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
-                    self.distance_check()
                     if event.key == pygame.K_RIGHT:
                         self.current_key = 'right'
                         if self.current_key == self.allowed_direction or self.allowed_direction == '':
@@ -79,13 +75,13 @@ class Car:
                         # move_left(motor_left, motor_right, speed=1)
                     if event.key == pygame.K_DOWN:
                         self.current_key = 'down'
-                        if self.current_key not in self.blocked_list:
+                        if self.current_key == self.allowed_direction or self.allowed_direction == '':
                             
                             print('Move backward...')
                             # move_backward(motor_left, motor_right, speed=1)
                     if event.key == pygame.K_UP:
                         self.current_key = 'up'
-                        if self.current_key not in self.blocked_list:
+                        if self.current_key == self.allowed_direction or self.allowed_direction == '':
                             
                             print('Move forward...')
                             # move_forward(motor_left, motor_right, speed=1)
@@ -97,8 +93,9 @@ class Car:
             time.sleep(0.1)#Wait for 100ms before next button press
 
     def distance_check(self):
-        while not self.stop_event:
-            if self.ir_sensor.current_voltage > 2:
+        while not self.stop_event.is_set():
+            print(self.ir_sensor.current_voltage)
+            if self.ir_sensor.current_voltage > 1.3:
                 self.allowed_direction = self.map_direction.get(self.last_key, '')
                 print('Stop motors...')
                 # stop_motors(motor_left, motor_right)
@@ -127,18 +124,5 @@ class Car:
         m1.stop()
         m2.stop()
 
-# button_forward.when_held = lambda : move_forward(button_forward, motor_left, motor_right)
-# button_forward.when_released = lambda : stop_motors(button_forward, motor_left, motor_right)
-#
-# button_backward.when_held = lambda : move_backward(button_backward, motor_left, motor_right)
-# button_backward.when_released = lambda : stop_motors(button_backward, motor_left, motor_right)
-#
-# button_left.when_held = lambda : move_left(button_left, motor_left, motor_right)
-# button_left.when_released = lambda : stop_motors(button_left, motor_left, motor_right)
-#
-# button_right.when_held = lambda : move_right(button_right, motor_left, motor_right)
-# button_right.when_released = lambda : stop_motors(button_right, motor_left, motor_right)
 
-
-while 1:
-    pass
+a = Car(1, 2, sensor, cap)
