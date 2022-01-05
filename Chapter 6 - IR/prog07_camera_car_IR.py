@@ -5,8 +5,8 @@ import time, threading
 import cv2
 from raspberry_functions import read_2column_files, interpolate1d, ActiveSensor
 
-# motor_left = Motor(forward=23, backward = 24, enable=25)  #
-# motor_right = Motor(forward=27, backward = 22, enable=17)  #
+motor_left = Motor(forward=24, backward = 23, enable=25)  #
+motor_right = Motor(forward=22, backward = 27, enable=17)  #
 
 ir = LED(2)
 mcp = MCP3008(channel=7)
@@ -67,28 +67,28 @@ class Car:
                         self.current_key = 'right'
                         if self.current_key == self.allowed_direction or self.allowed_direction == '':
                             print('Move right...')
-                            # move_right(motor_left, motor_right, speed=1)
+                            self.move_right(speed=1)
                     if event.key == pygame.K_LEFT:
                         self.current_key = 'left'
                         if self.current_key == self.allowed_direction or self.allowed_direction == '':
                             print('Move left...')
-                        # move_left(motor_left, motor_right, speed=1)
+                        self.move_left(speed=1)
                     if event.key == pygame.K_DOWN:
                         self.current_key = 'down'
                         if self.current_key == self.allowed_direction or self.allowed_direction == '':
                             
                             print('Move backward...')
-                            # move_backward(motor_left, motor_right, speed=1)
+                            self.move_backward(speed=1)
                     if event.key == pygame.K_UP:
                         self.current_key = 'up'
                         if self.current_key == self.allowed_direction or self.allowed_direction == '':
                             
                             print('Move forward...')
-                            # move_forward(motor_left, motor_right, speed=1)
+                            self.move_forward(speed=1)
 
                 if event.type == pygame.KEYUP:
                     print('Stop motors...')
-                    # stop_motors(motor_left, motor_right)
+                    self.stop_motors()
 
             time.sleep(0.1)#Wait for 100ms before next button press
 
@@ -98,31 +98,31 @@ class Car:
             if self.ir_sensor.current_voltage > 1.3:
                 self.allowed_direction = self.map_direction.get(self.last_key, '')
                 print('Stop motors...')
-                # stop_motors(motor_left, motor_right)
+                self.stop_motors()
             else:
                 self.allowed_direction = ''
                 self.last_key = self.current_key
             time.sleep(0.5)
 
-    def move_forward(self, m1, m2, speed=0.8):
-        m1.forward(speed=speed)
-        m2.forward(speed=speed)
+    def move_forward(self, speed=0.8):
+        self.motor1.forward(speed=speed)
+        self.motor2.forward(speed=speed)
 
-    def move_backward(self, m1, m2, speed=0.8):
-        m1.backward(speed=speed)
-        m2.backward(speed=speed)
+    def move_backward(self, speed=0.8):
+        self.motor1.backward(speed=speed)
+        self.motor2.backward(speed=speed)
 
-    def move_left(self, mleft, mright, speed=0.8):
-        mleft.backward(speed=speed)
+    def move_left(self, speed=0.8):
+        self.motor1.backward(speed=speed)
         #mright.forward(speed=speed)
 
-    def move_right(self, mleft, mright, speed=0.8):
+    def move_right(self, speed=0.8):
         #mleft.forward(speed=speed)
-        mright.backward(speed=speed)
+        self.motor2.backward(speed=speed)
 
-    def stop_motors(self, m1, m2):
-        m1.stop()
-        m2.stop()
+    def stop_motors(self):
+        self.motor1.stop()
+        self.motor2.stop()
 
 
-a = Car(1, 2, sensor, cap)
+a = Car(motor_left, motor_right, sensor, cap)
