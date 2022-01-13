@@ -78,6 +78,7 @@ import time
 import datetime as dt
 import matplotlib.pyplot as plt
 
+
 def read_2column_files(name, header=True):
     lines = read_temp_raw(name)
     if header:
@@ -97,7 +98,7 @@ def interpolate1d(x, y, target):
 
 
 class ActiveSensor:
-    def __init__(self, led, mcp, calibname, sampling_rate=1, print_distance=True):
+    def __init__(self, led, mcp, calibname, sampling_rate=1, print_distance=True, calibrate=True):
         self.led = led
         self.mcp = mcp
         self.calibfile = calibname
@@ -109,6 +110,7 @@ class ActiveSensor:
         self.dlist = []
         self.ylist = []
         self.print_distance = print_distance
+        self.calibrate = calibrate
         
     def start(self):
         self.event.clear()
@@ -121,11 +123,14 @@ class ActiveSensor:
         while not self.event.is_set():
             dd = dt.datetime.now()
             self.current_voltage = self.mcp.voltage
-            self.current_distance = interpolate1d(self.calib_volt, self.calib_distance, self.current_voltage)
+            if self.calibrate:
+                self.current_distance = interpolate1d(self.calib_volt, self.calib_distance, self.current_voltage)
+            else:
+                self.current_distance = self.current_voltage
             if self.print_distance:
-                print(f'Current distance from object is: {self.current_distance:.2} cm')
+                print(f'Current distance from object is: {self.current_distance:.3} cm')
             self.prepare_data(dd, self.current_distance)
-            time.sleep(self.sampling_rate)
+            time.sleep(1/self.sampling_rate)
         
     def stop(self):
         self.event.set()
@@ -166,4 +171,5 @@ class ActiveSensor:
             self.figure.canvas.flush_events()
             plt.gcf().autofmt_xdate()
             time.sleep(2)
+
 
