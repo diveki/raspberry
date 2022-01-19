@@ -46,4 +46,4 @@ class Recording():
     def close(self):
         self.stream.stop_stream()
         self.stream.close()
-        self.terminate()
+        self.pa.terminate()
