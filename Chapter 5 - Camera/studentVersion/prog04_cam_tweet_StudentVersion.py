@@ -14,7 +14,7 @@ cap =
 # inicializald a nyomogombot
 button = 
 
-# ird be a kep lokaciojat es nevet a ... helyere
+# ird be a .json fajl lokaciojat es nevet a ... helyere sztring formatumban
 with open(...) as f:
     details = json.load(f)
 
@@ -55,6 +55,19 @@ while True:
     if cv2.waitKey(100) & 0xFF == ord('q'):
         break
     time.sleep(0.2)
+
+#### Ha nincs raspberry akkor ezt a szekciot lehet csinalni
+# while True:
+#     answer = input('`p` - kep keszites; `q` - kilepes: ')
+#     if answer == 'p':
+#         action()
+#     elif answer == 'q':
+#         break
+#     else:
+#         pass
+#     if cv2.waitKey(100) & 0xFF == ord('q'):
+#         break
+#     time.sleep(0.2)
 
 cap.release()
 # Bezarunk minden ablakot, amit a program megnyitott

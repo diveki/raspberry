@@ -212,3 +212,11 @@ class Recording():
         self.stream.stop_stream()
         self.stream.close()
         self.pa.terminate()
+
+
+def voice2signal(voice, window=500, normalize=2**15, limit=0.1):
+    filtered = np.convolve(np.abs(voice), np.ones(window), 'same')
+    filtered = filtered/(normalize*window)
+    filtered[filtered<limit] = 0
+    filtered[filtered>0] = 1
+    return filtered
