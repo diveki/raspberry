@@ -64,7 +64,7 @@ while True:
 #     elif answer == 'q':
 #         break
 #     else:
-#         pass
+#         pass 
 #     if cv2.waitKey(100) & 0xFF == ord('q'):
 #         break
 #     time.sleep(0.2)

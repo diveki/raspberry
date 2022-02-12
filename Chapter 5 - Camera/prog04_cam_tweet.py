@@ -9,7 +9,8 @@ import json, tweepy
 from gpiozero import Button
 from random import choice
 
-cap = cv2.VideoCapture(0)
+#cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('/dev/video0')
 button = Button(2)
 
 with open('./twitter/twitter.json') as f:
@@ -33,19 +34,35 @@ def snapshot():
     return text
 
 def send_tweet(text, obj):
-    obj.update_with_media('twitter/image.png', text)
+    obj.update_status_with_media(text, 'twitter/image.png')
 
 def action():
     text = snapshot()
     send_tweet(text, api)
     print('Tweet has been sent!')
 
+<<<<<<< HEAD
 # button.when_pressed = action
+=======
+#button.when_pressed = action
+
+#while True:
+#    if cv2.waitKey(100) & 0xFF == ord('q'):
+#        break
+#    time.sleep(0.2)
+>>>>>>> c166f1e435d579099d74151c3698ffdac659eadb
 
 while True:
-    if cv2.waitKey(100) & 0xFF == ord('q'):
-        break
-    time.sleep(0.2)
+     answer = input('`p` - kep keszites; `q` - kilepes: ')
+     if answer == 'p':
+         action()
+     elif answer == 'q':
+         break
+     else:
+         pass 
+     if cv2.waitKey(100) & 0xFF == ord('q'):
+         break
+     time.sleep(0.2)
 
 # while True:
 #     answer = input('`p` - kep keszites; `q` - kilepes: ')
