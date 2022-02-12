@@ -1,5 +1,6 @@
 # In the Settings tab, change the Application type to Read, Write and Access direct messages
 # In the Reset keys tab, press the Reset button, update the consumer key and secret in your application accordingly.
+# makesquare_test, Pi...17
 
 import cv2, time
 import numpy as np
@@ -39,12 +40,24 @@ def action():
     send_tweet(text, api)
     print('Tweet has been sent!')
 
-button.when_pressed = action
+# button.when_pressed = action
 
 while True:
     if cv2.waitKey(100) & 0xFF == ord('q'):
         break
     time.sleep(0.2)
+
+# while True:
+#     answer = input('`p` - kep keszites; `q` - kilepes: ')
+#     if answer == 'p':
+#         action()
+#     elif answer == 'q':
+#         break
+#     else:
+#         pass
+#     if cv2.waitKey(100) & 0xFF == ord('q'):
+#         break
+#     time.sleep(0.2)
 
 cap.release()
 # Bezarunk minden ablakot, amit a program megnyitott
