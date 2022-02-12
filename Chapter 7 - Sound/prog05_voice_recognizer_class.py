@@ -53,7 +53,7 @@ class Voice_Recognizer(Recording):
             reference = self.records[name]['spectrum']
             result = 0
             for spec in reference:
-                result = result + np.corrcoef(spec, self.spectrum)
+                result = result + np.min(np.corrcoef(spec, self.spectrum))
             self.coef[name] = result/len(reference)
 
 
@@ -64,7 +64,8 @@ while True:
     if answer == 'q':
         sys.exit(0)
     else:
-        rec.fix_recording(2)
+        print('Felvetel indul')
+        rec.fix_recording(4)
         rec.process_voice()
         rec.get_coefs()
         print(rec.coef)
