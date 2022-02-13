@@ -59,3 +59,4 @@ sudo apt-get install --yes python3-pyside2.qt3dcore python3-pyside2.qt3dinput py
 # Sound
 
 pip install pyaudio
+pip install SpeechRecognition

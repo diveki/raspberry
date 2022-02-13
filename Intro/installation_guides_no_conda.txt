@@ -148,3 +148,4 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 # Sound
 
 # pip install pyaudio?
+ pip install SpeechRecognition
