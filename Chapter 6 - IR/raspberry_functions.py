@@ -79,7 +79,7 @@ import datetime as dt
 import matplotlib.pyplot as plt
 
 
-def read_2column_files(name, header=True):
+def read_2column_files(name, sep=',', header=True):
     lines = read_temp_raw(name)
     if header:
         lines.pop(0)
@@ -87,7 +87,7 @@ def read_2column_files(name, header=True):
     voltage = []
     for line in lines:
         if line.strip() != '':
-            data = line.strip().split(',')
+            data = line.strip().split(sep)
             voltage.append(float(data[0]))
             distance.append(float(data[1]))
     return np.array(voltage), np.array(distance)
