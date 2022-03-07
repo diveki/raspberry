@@ -1,5 +1,4 @@
 import threading
-import random
 import time
 from gpiozero import LED, MCP3008
 from raspberry_functions import read_2column_files, interpolate1d
