@@ -8,6 +8,8 @@ mcp = MCP3008(channel=7)
 calib_file = 'ir_calibration.csv'
 volt, distance = read_2column_files(calib_file, header=True)
 
+ir.on()
+
 while True:
     current_voltage = mcp.voltage
     current_distance = interpolate1d(volt, distance, current_voltage)
