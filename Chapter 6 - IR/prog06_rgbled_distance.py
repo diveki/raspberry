@@ -4,7 +4,6 @@ from raspberry_functions import read_2column_files, interpolate1d, ActiveSensor
 from gpiozero import LED, MCP3008, RGBLED
 import datetime as dt
 import matplotlib.pyplot as plt
-import random
 
 
 class RGBActiveSensor(ActiveSensor):
@@ -35,11 +34,11 @@ class RGBActiveSensor(ActiveSensor):
 
 	def set_color(self, value):
 		if value < 10:
-			self.rgb.color = (0,1,0) # green
+			self.rgb.color = (1,0,0) # green
 		elif 10 <= value < 17:
 			self.rgb.color = (1,1,0) # yellow
 		elif value >= 17:
-			self.rgb.color = (1,0,0) # red
+			self.rgb.color = (0,1,0) # red
 
 
 
