@@ -72,7 +72,7 @@ class Car:
                         self.current_key = 'left'
                         if self.current_key == self.allowed_direction or self.allowed_direction == '':
                             print('Move left...')
-                        self.move_left(speed=1)
+                            self.move_left(speed=1)
                     if event.key == pygame.K_DOWN:
                         self.current_key = 'down'
                         if self.current_key == self.allowed_direction or self.allowed_direction == '':
@@ -97,8 +97,9 @@ class Car:
             print(self.ir_sensor.current_voltage)
             if self.ir_sensor.current_voltage > 1.3:
                 self.allowed_direction = self.map_direction.get(self.last_key, '')
-                print('Stop motors...')
-                self.stop_motors()
+                if self.current_key != self.last_key:
+                    print('Stop motors...')
+                    self.stop_motors()
             else:
                 self.allowed_direction = ''
                 self.last_key = self.current_key
