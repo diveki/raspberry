@@ -107,24 +107,24 @@ class ActiveSensor:
         self.sampling_rate = sampling_rate
         self.plot_length = 20
         self.initialize_calibration(self.calibfile)
-        self.event = threading.Event()
-        self.event_plot = threading.Event()
-        self.dlist = []
-        self.ylist = []
+        self.event = # hozz letre egy esemenyt a threading csomagbol
+        self.event_plot = # hozz letre egy esemenyt a threading csomagbol
+        self.dlist = # hozz letre egy ures listat
+        self.ylist = # hozz letre egy ures listat
         self.print_distance = print_distance
         self.calibrate = calibrate
         
     def start(self):
-        self.event.clear()
-        self.led.on()
+        # allitsd vissza alap allapotba a self.event esemenyt a clear metodussal
+        # kapcsold be a self.led-et
         t = threading.Thread(target=self.start_measurement)
-        t.start()
+        # inditsd el a t threadet
 
     def start_measurement(self):
         print('Measurement started')
         while not self.event.is_set():
-            dd = dt.datetime.now()
-            self.current_voltage = self.mcp.voltage
+            dd = # merd meg a jelenlegi idot a dt.datetime csomag now fuggvenyevel
+            self.current_voltage = # merd meg a jelenlegi feszultseget a self.mcp-n
             if self.calibrate:
                 self.current_distance = interpolate1d(self.calib_volt, self.calib_distance, self.current_voltage)
             else:
@@ -135,8 +135,8 @@ class ActiveSensor:
             time.sleep(1/self.sampling_rate)
         
     def stop(self):
-        self.event.set()
-        self.led.off()
+        # aktivald a self.event esemenyt
+        # kapcsold ki a self.led-et
         print('Measurement is stopped')
 
     def initialize_calibration(self, filename):
